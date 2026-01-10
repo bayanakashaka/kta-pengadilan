@@ -3,53 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <title>KTA Pengadilan Negeri Kota Indopride</title>
+
 <style>
 :root{
-  --hitam:#0f0f0f;
-  --marun:#6e0f14;
-  --emas:#c9a24d;
-  --krem:#f6f2ea;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:"Times New Roman", serif;
-  background:#bbb;
+  --hitam:#121212;
+  --marun:#6b0f1a;
+  --emas:#c9a44c;
+  --kertas:#f4f1ea;
 }
 
-/* ================= PANEL INPUT ================= */
-#panel{
-  background:#eee;
-  padding:16px;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#999;
+  font-family:"Times New Roman", serif;
 }
-#panel h3{margin-top:0}
-#panel input{
-  width:100%;
+
+/* ================= INPUT ================= */
+#input-box{
+  background:#eee;
+  padding:14px;
+}
+#input-box input{
   padding:8px;
+  width:100%;
   margin-bottom:8px;
 }
 
 /* ================= KARTU ================= */
-.kartu{
+.kta{
   width:1000px;
   height:600px;
   margin:20px auto;
-  background:var(--krem);
-  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  background:var(--kertas);
   position:relative;
+  box-shadow:0 25px 60px rgba(0,0,0,.5);
+  overflow:hidden;
+}
+
+/* WATERMARK */
+.kta::before{
+  content:"⚖";
+  position:absolute;
+  font-size:420px;
+  color:rgba(0,0,0,.03);
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
 }
 
 /* HEADER */
 .header{
   background:linear-gradient(to right,#000,#222);
   color:#fff;
-  padding:20px;
+  padding:22px 30px;
 }
 .header h1{
   margin:0;
-  letter-spacing:3px;
+  letter-spacing:4px;
 }
-.header p{margin:4px 0 0}
+.header p{
+  margin:6px 0 0;
+  letter-spacing:2px;
+}
 
 /* STRIP */
 .strip{
@@ -57,7 +74,8 @@ body{
   color:#fff;
   display:flex;
   justify-content:space-between;
-  padding:10px 20px;
+  padding:10px 30px;
+  font-weight:bold;
   letter-spacing:2px;
 }
 
@@ -65,21 +83,30 @@ body{
 .content{
   display:flex;
   padding:30px;
+  position:relative;
+  z-index:2;
 }
+
 .data{
   flex:2;
-  background:#eee8dd;
   padding:20px;
-  border-left:6px solid var(--emas);
+  background:#eae4d8;
+  border-left:7px solid var(--emas);
 }
 .data h2{
-  margin:10px 0;
+  margin:14px 0 6px;
   font-size:36px;
 }
 .data h3{
   margin:0;
   font-weight:normal;
 }
+.data p{
+  margin-top:18px;
+  font-size:14px;
+}
+
+/* FOTO */
 .foto{
   flex:1;
   text-align:center;
@@ -88,51 +115,58 @@ body{
   width:260px;
   height:330px;
   object-fit:cover;
-  border:8px solid var(--marun);
+  border:7px solid var(--marun);
+  background:#fff;
 }
 
 /* FOOTER */
 .footer{
   position:absolute;
-  bottom:20px;
+  bottom:18px;
   left:30px;
+  z-index:2;
 }
 .footer img{
-  height:40px;
+  height:45px;
 }
+.footer p{
+  margin:4px 0;
+}
+
+/* MASA BERLAKU */
 .valid{
   position:absolute;
-  bottom:0;
   right:0;
+  bottom:0;
   background:var(--marun);
   color:#fff;
-  padding:14px 20px;
-  text-align:center;
+  padding:16px 22px;
   font-weight:bold;
+  text-align:center;
+  letter-spacing:1px;
 }
 
 /* PRINT */
 @media print{
-  #panel{display:none}
+  #input-box{display:none}
   body{background:#fff}
-  .kartu{box-shadow:none}
+  .kta{box-shadow:none}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= PANEL INPUT ================= -->
-<div id="panel">
-  <h3>Panel Pengisian Data Anggota</h3>
+<!-- ================= INPUT DATA ================= -->
+<div id="input-box">
   <input placeholder="Nama Lengkap" oninput="setText('nama',this.value)">
-  <input placeholder="Jabatan / Divisi" oninput="setText('jabatan',this.value)">
+  <input placeholder="Jabatan" oninput="setText('jabatan',this.value)">
   <input type="date" oninput="setTanggal(this.value)">
   <input type="file" accept="image/*" onchange="setFoto(this)">
 </div>
 
 <!-- ================= KARTU ================= -->
-<div class="kartu">
+<div class="kta">
 
   <div class="header">
     <h1>KARTU TANDA ANGGOTA</h1>
@@ -148,18 +182,21 @@ body{
     <div class="data">
       <p><b>LEMBAGA KEHAKIMAN</b></p>
       <h2 id="nama">NAMA ANGGOTA</h2>
-      <h3 id="jabatan">JABATAN / DIVISI</h3>
-      <p>Jl. Occupation Avenue Kota Indopride – Kode Pos 7239</p>
+      <h3 id="jabatan">JABATAN</h3>
+      <p>
+        Jl. Occupation Avenue Kota Indopride<br>
+        Kode Pos 7239
+      </p>
     </div>
 
     <div class="foto">
-      <img id="foto" src="">
+      <img id="foto">
     </div>
   </div>
 
   <div class="footer">
     <p><b>KEPALA PENGADILAN</b></p>
-    <img src="ttd.png">
+    <img src="signature.png">
     <p>KOWE GORILA</p>
   </div>
 
@@ -171,25 +208,29 @@ body{
 </div>
 
 <script>
-/* NOMOR OTOMATIS (TETAP) */
+/* NOMOR ANGGOTA (STABIL SAAT LOAD) */
 document.getElementById("nomor").innerText =
-"NO. PN-IDP-" + new Date().getFullYear() + "-" + Math.floor(Math.random()*900000+100000);
+"NO. PN-IDP-" + new Date().getFullYear() + "-" +
+Math.floor(Math.random()*900000+100000);
 
-/* LIVE UPDATE */
+/* LIVE INPUT */
 function setText(id,val){
-  document.getElementById(id).innerText = val || id.toUpperCase();
+  document.getElementById(id).innerText =
+  val || id.toUpperCase();
 }
+
 function setTanggal(val){
   if(!val) return;
-  const d = new Date(val);
-  const opsi={day:'numeric',month:'long',year:'numeric'};
+  const d=new Date(val);
   document.getElementById("tanggal").innerText =
-  d.toLocaleDateString('id-ID',opsi);
+  d.toLocaleDateString("id-ID",
+  {day:"numeric",month:"long",year:"numeric"});
 }
+
 function setFoto(input){
-  const reader=new FileReader();
-  reader.onload=e=>document.getElementById("foto").src=e.target.result;
-  reader.readAsDataURL(input.files[0]);
+  const r=new FileReader();
+  r.onload=e=>document.getElementById("foto").src=e.target.result;
+  r.readAsDataURL(input.files[0]);
 }
 </script>
 
