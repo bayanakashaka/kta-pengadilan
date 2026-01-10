@@ -5,7 +5,7 @@
 <title>KTA Pengadilan Kota Indopride</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Cinzel:wght@500;700&family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Cinzel:wght@600;700&family=Inter:wght@400;600&display=swap');
 
 body{
     background:#bfbfbf;
@@ -49,7 +49,7 @@ body{
     letter-spacing:1px;
 }
 
-/* EDIT */
+/* EDIT BUTTON */
 #editBtn{
     position:absolute;
     top:170px;
@@ -57,6 +57,7 @@ body{
     padding:6px 14px;
     font-size:12px;
     cursor:pointer;
+    z-index:10;
 }
 
 /* CONTENT */
@@ -84,38 +85,29 @@ body{
     color:#6b1115;
 }
 
-/* FONT NAMA ANGGOTA */
+/* TEXT */
 .name{
     font-family:'Merriweather',serif;
     font-size:32px;
     font-weight:700;
     margin:12px 0;
-    color:#111;
 }
-.divisi{
-    font-size:18px;
-    font-weight:600;
-}
-.address{
-    font-size:14px;
-    margin-top:8px;
-    opacity:.85;
-}
+.divisi{font-size:18px;font-weight:600}
+.address{font-size:14px;margin-top:8px;opacity:.85}
 
 /* FORM */
 .form{display:none;margin-bottom:12px}
-.edit-mode .form{display:block}
+.card.edit-mode .form{display:block}
 .form input{
     width:100%;
     padding:10px;
     margin-top:8px;
 }
 
-/* SIGNATURE – DIGESER KE POJOK */
+/* SIGNATURE – KIRI */
 .signature{
     margin-top:40px;
-    text-align:right;
-    padding-right:40px;
+    text-align:left;
 }
 .signature .title{
     font-size:13px;
@@ -130,7 +122,6 @@ body{
     font-family:'Cinzel',serif;
     font-size:18px;
     font-weight:700;
-    letter-spacing:1px;
 }
 
 /* PHOTO */
@@ -160,7 +151,6 @@ body{
     padding:12px;
     margin-top:10px;
     font-weight:700;
-    letter-spacing:1px;
 }
 
 /* PRINT */
@@ -195,6 +185,7 @@ body{
 <img src="scales.png" class="watermark">
 
 <div class="left">
+
 <div class="block">
 <small>LEMBAGA KEHAKIMAN</small>
 
@@ -216,6 +207,7 @@ Jl. Occupation Avenue Kota Indopride – Kode Pos 7239
 <img src="signature.png">
 <div class="name">KOWE GORILA</div>
 </div>
+
 </div>
 
 <div class="photo">
@@ -230,64 +222,73 @@ Jl. Occupation Avenue Kota Indopride – Kode Pos 7239
 </div>
 
 <script>
+/* EDIT MODE – FIX */
 const card=document.getElementById("card");
 const btn=document.getElementById("editBtn");
 btn.onclick=()=>{
-card.classList.toggle("edit-mode");
-btn.innerText=card.classList.contains("edit-mode")?"SELESAI":"EDIT DATA";
+    card.classList.toggle("edit-mode");
+    btn.innerText = card.classList.contains("edit-mode")
+        ? "SELESAI"
+        : "EDIT DATA";
 };
 
+/* NOMOR */
 if(!localStorage.getItem("ktaNumber")){
-const y=new Date().getFullYear();
-const r=Math.floor(100000+Math.random()*900000);
-localStorage.setItem("ktaNumber",`PN-IDP-${y}-${r}`);
+    const y=new Date().getFullYear();
+    const r=Math.floor(100000+Math.random()*900000);
+    localStorage.setItem("ktaNumber",`PN-IDP-${y}-${r}`);
 }
-document.getElementById("nomor").innerText="NO. "+localStorage.getItem("ktaNumber");
+document.getElementById("nomor").innerText=
+"NO. "+localStorage.getItem("ktaNumber");
 
+/* INPUT */
 function bind(i,d,k,def){
-const I=document.getElementById(i);
-const D=document.getElementById(d);
-const v=localStorage.getItem(k);
-D.innerText=v||def;
-I.value=v||"";
-I.oninput=()=>{
-D.innerText=I.value||def;
-localStorage.setItem(k,I.value);
-};
+    const I=document.getElementById(i);
+    const D=document.getElementById(d);
+    const v=localStorage.getItem(k);
+    D.innerText=v||def;
+    I.value=v||"";
+    I.oninput=()=>{
+        D.innerText=I.value||def;
+        localStorage.setItem(k,I.value);
+    };
 }
 bind("namaInput","namaDisplay","ktaNama","NAMA ANGGOTA");
 bind("jabatanInput","jabatanDisplay","ktaJabatan","JABATAN");
 
+/* TANGGAL */
 const vI=document.getElementById("validInput");
 const vD=document.getElementById("validDate");
 if(localStorage.getItem("ktaValid")){
-vI.value=localStorage.getItem("ktaValid");
-setDate(vI.value);
+    vI.value=localStorage.getItem("ktaValid");
+    setDate(vI.value);
 }
 vI.onchange=()=>{
-localStorage.setItem("ktaValid",vI.value);
-setDate(vI.value);
+    localStorage.setItem("ktaValid",vI.value);
+    setDate(vI.value);
 };
 function setDate(v){
-if(!v)return;
-vD.innerText="BERLAKU HINGGA\n"+new Date(v)
-.toLocaleDateString("id-ID",{day:'2-digit',month:'long',year:'numeric'});
+    if(!v)return;
+    vD.innerText="BERLAKU HINGGA\n"+
+    new Date(v).toLocaleDateString("id-ID",
+    {day:'2-digit',month:'long',year:'numeric'});
 }
 
+/* FOTO */
 const pI=document.getElementById("photoInput");
 const pP=document.getElementById("photoPreview");
 if(localStorage.getItem("ktaPhoto")){
-pP.src=localStorage.getItem("ktaPhoto");
+    pP.src=localStorage.getItem("ktaPhoto");
 }
 pI.onchange=()=>{
-const f=pI.files[0];
-if(!f)return;
-const r=new FileReader();
-r.onload=e=>{
-pP.src=e.target.result;
-localStorage.setItem("ktaPhoto",e.target.result);
-};
-r.readAsDataURL(f);
+    const f=pI.files[0];
+    if(!f)return;
+    const r=new FileReader();
+    r.onload=e=>{
+        pP.src=e.target.result;
+        localStorage.setItem("ktaPhoto",e.target.result);
+    };
+    r.readAsDataURL(f);
 };
 </script>
 
