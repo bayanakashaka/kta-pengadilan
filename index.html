@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>KTA Pengadilan Kota Indopride</title>
+<title>KTA Pengadilan Negeri Kota Indopride</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap');
@@ -14,7 +14,7 @@ body {
 
 .card {
     width: 1000px;
-    height: 620px;
+    height: 650px;
     background: #f7f4ee;
     margin: 40px auto;
     box-shadow: 0 20px 40px rgba(0,0,0,.35);
@@ -113,9 +113,17 @@ body {
     opacity: .85;
 }
 
+/* INPUT */
+.form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
 /* SIGNATURE */
 .signature {
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .signature img {
@@ -138,16 +146,6 @@ body {
     margin-left: auto;
     z-index: 1;
 }
-    .photo-box input {
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    opacity: 0;
-    width: calc(100% - 16px);
-    height: 40px;
-    cursor: pointer;
-}
-
 
 .photo-box {
     width: 260px;
@@ -163,6 +161,16 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.photo-box input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 }
 
 .valid {
@@ -185,7 +193,7 @@ body {
         <img src="logo.png">
         <div>
             <h1>KARTU TANDA ANGGOTA</h1>
-            <p>PENGADILAN KOTA INDOPRIDE</p>
+            <p>PENGADILAN NEGERI KOTA INDOPRIDE</p>
         </div>
     </div>
 
@@ -200,8 +208,15 @@ body {
         <div class="left">
             <div class="block">
                 <small>LEMBAGA KEHAKIMAN</small>
-                <div class="name">BAYANAKA S. ATMADJA</div>
-                <div class="divisi">DIVISI ADMINISTRASI</div>
+
+                <div class="form">
+                    <input id="namaInput" placeholder="Nama Lengkap">
+                    <input id="jabatanInput" placeholder="Jabatan / Divisi">
+                    <input id="validInput" type="date">
+                </div>
+
+                <div class="name" id="namaDisplay"></div>
+                <div class="divisi" id="jabatanDisplay"></div>
                 <div class="address">
                     Jl. Occupation Avenue Kota Indopride – Kode Pos 7239
                 </div>
@@ -210,56 +225,86 @@ body {
             <div class="signature">
                 <div class="title">KEPALA PENGADILAN</div>
                 <img src="signature.png">
-                <div class="name">KOWE GORILA</div>
+                <div class="name">Sultan Mangkuasomoro I</div>
             </div>
         </div>
 
-        <div class="photo-box">
-    <img id="photoPreview" src="foto-default.png">
-    <input type="file" id="photoInput" accept="image/*">
-</div>
-
+        <div class="photo">
+            <div class="photo-box">
+                <img id="photoPreview" src="foto-default.png">
+                <input type="file" id="photoInput" accept="image/*">
+            </div>
+            <div class="valid" id="validDate"></div>
+        </div>
     </div>
 </div>
 
 <script>
-/* NOMOR ANGGOTA STABIL */
+/* NOMOR ANGGOTA TETAP */
 if(!localStorage.getItem("ktaNumber")){
     const year = new Date().getFullYear();
-    const random = Math.floor(100000 + Math.random() * 900000);
-    localStorage.setItem("ktaNumber", `PN-IDP-${year}-${random}`);
+    const rnd = Math.floor(100000 + Math.random() * 900000);
+    localStorage.setItem("ktaNumber", `PN-IDP-${year}-${rnd}`);
 }
-document.getElementById("nomor").innerText = "NO. " + localStorage.getItem("ktaNumber");
-/* UPLOAD FOTO */
+document.getElementById("nomor").innerText =
+"NO. " + localStorage.getItem("ktaNumber");
+
+/* INPUT TEXT */
+function bindInput(idInput, idDisplay, key){
+    const input = document.getElementById(idInput);
+    const display = document.getElementById(idDisplay);
+
+    if(localStorage.getItem(key)){
+        input.value = localStorage.getItem(key);
+        display.innerText = localStorage.getItem(key);
+    }
+
+    input.addEventListener("input", ()=>{
+        display.innerText = input.value;
+        localStorage.setItem(key, input.value);
+    });
+}
+
+bindInput("namaInput","namaDisplay","ktaNama");
+bindInput("jabatanInput","jabatanDisplay","ktaJabatan");
+
+/* MASA BERLAKU */
+const validInput = document.getElementById("validInput");
+const validDate = document.getElementById("validDate");
+
+if(localStorage.getItem("ktaValid")){
+    validInput.value = localStorage.getItem("ktaValid");
+    validDate.innerText = "BERLAKU HINGGA\n" +
+        new Date(validInput.value).toLocaleDateString('id-ID',
+        {day:'2-digit',month:'long',year:'numeric'});
+}
+
+validInput.addEventListener("change", ()=>{
+    localStorage.setItem("ktaValid", validInput.value);
+    validDate.innerText = "BERLAKU HINGGA\n" +
+        new Date(validInput.value).toLocaleDateString('id-ID',
+        {day:'2-digit',month:'long',year:'numeric'});
+});
+
+/* FOTO */
 const photoInput = document.getElementById("photoInput");
 const photoPreview = document.getElementById("photoPreview");
 
-photoInput.addEventListener("change", function(){
-    const file = this.files[0];
-    if(!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function(e){
-        photoPreview.src = e.target.result;
-        localStorage.setItem("ktaPhoto", e.target.result);
-    }
-    reader.readAsDataURL(file);
-});
-
-/* SIMPAN FOTO */
 if(localStorage.getItem("ktaPhoto")){
     photoPreview.src = localStorage.getItem("ktaPhoto");
 }
 
-/* MASA BERLAKU 3 TAHUN */
-const now = new Date();
-const valid = new Date(now.setFullYear(now.getFullYear()+3));
-document.getElementById("validDate").innerText =
-"BERLAKU HINGGA\n" +
-valid.toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});
+photoInput.addEventListener("change", function(){
+    const file = this.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = e=>{
+        photoPreview.src = e.target.result;
+        localStorage.setItem("ktaPhoto", e.target.result);
+    };
+    reader.readAsDataURL(file);
+});
 </script>
 
 </body>
 </html>
-
-
