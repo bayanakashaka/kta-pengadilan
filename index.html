@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>KTA Pengadilan Kota Indopride</title>
+    <title>KTA Pengadilan Kota Indopride - Revisi Final</title>
     <style>
         :root {
             --emerald: #004d40;
@@ -18,10 +18,9 @@
             min-height: 100vh;
             background-color: #1a1a1a;
             margin: 0;
-            font-family: 'Times New Roman', serif;
+            font-family: 'Times New Roman', Times, serif; /* Font seragam ke seluruh kartu */
         }
 
-        /* Instruksi kecil di luar kartu */
         .hint { color: #888; font-size: 12px; margin-bottom: 10px; font-family: Arial; }
 
         /* Kartu Utama */
@@ -57,7 +56,6 @@
             font-size: 10px;
             font-weight: bold;
             letter-spacing: 2px;
-            font-family: Arial;
         }
 
         /* Header */
@@ -79,8 +77,6 @@
             object-fit: contain;
         }
 
-        .header-text { flex-grow: 1; }
-
         .header h1 {
             margin: 0;
             font-size: 18px;
@@ -92,14 +88,13 @@
 
         .header p {
             margin: 3px 0 0;
-            font-size: 9px;
-            font-family: Arial, sans-serif;
+            font-size: 10px;
         }
 
         /* Konten */
         .content {
             margin-left: 50px;
-            padding: 20px;
+            padding: 25px 20px;
             display: flex;
         }
 
@@ -120,39 +115,44 @@
 
         .details {
             margin-left: 20px;
-            font-family: Arial, sans-serif;
             flex-grow: 1;
         }
 
-        .details table { width: 100%; font-size: 13px; border-collapse: collapse; }
-        .details td { padding: 4px 0; }
-        .label { font-weight: bold; color: var(--emerald); width: 80px; }
+        .details table { width: 100%; font-size: 15px; border-collapse: collapse; }
+        .details td { padding: 5px 0; }
+        .label { font-weight: bold; color: var(--emerald); width: 85px; }
         .editable { outline: none; border-bottom: 1px dashed transparent; }
-        .editable:focus { border-bottom-color: #bf953f; background: #fffde7; }
+        .editable:focus { background: #fffde7; }
 
-        /* Area TTD Statis */
+        /* Area TTD - Dibuat Lebih Simetris */
         .stamp-area {
             position: absolute;
             bottom: 45px;
-            right: 25px;
+            right: 30px;
             text-align: center;
-            width: 150px;
+            width: 180px; /* Lebar ditambah agar lebih seimbang */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .ttd-statis {
-            height: 50px;
-            margin: 5px 0;
+            height: 55px;
+            width: auto;
+            margin: 2px 0;
             object-fit: contain;
-            /* mix-blend-mode membuat background putih TTD hilang jika kartu berwarna */
-            mix-blend-mode: multiply; 
+            mix-blend-mode: multiply;
         }
 
-        .signature {
+        .signature-line {
+            width: 100%;
+            border-top: 1.5px solid #000;
+            margin-top: 2px;
+            padding-top: 3px;
             font-weight: bold;
-            border-top: 1px solid #000;
-            font-size: 11px;
-            padding-top: 2px;
+            font-size: 12px;
             text-transform: uppercase;
+            text-align: center;
         }
 
         /* Footer */
@@ -170,7 +170,7 @@
         .kta-title {
             color: var(--emerald);
             font-weight: bold;
-            font-size: 13px;
+            font-size: 14px;
             letter-spacing: 1px;
         }
 
@@ -179,7 +179,7 @@
 </head>
 <body>
 
-    <div class="hint">Klik teks untuk edit | Klik kotak foto untuk ganti foto</div>
+    <div class="hint">Klik teks untuk edit | Klik kotak foto untuk ganti foto pegawai</div>
 
     <div class="card">
         <div class="side-batik">
@@ -187,7 +187,7 @@
         </div>
 
         <div class="header">
-            <img src="logo.png" alt="Logo" class="logo-statis" onerror="this.style.display='none'">
+            <img src="logo.png" alt="Logo" class="logo-statis" onerror="this.style.opacity='0'">
             
             <div class="header-text">
                 <h1>PENGADILAN KOTA INDOPRIDE</h1>
@@ -224,9 +224,9 @@
         </div>
 
         <div class="stamp-area">
-            <p style="font-size: 9px; margin: 0;">Ketua Pengadilan,</p>
-            <img src="ttd.png" alt="TTD" class="ttd-statis" onerror="this.style.opacity='0'">
-            <div class="signature" contenteditable="true">H. ACHMAD SUDIRMAN, S.H., M.H.</div>
+            <div style="font-size: 11px;">Ketua Pengadilan,</div>
+            <img src="ttd.png" alt=" " class="ttd-statis" onerror="this.style.opacity='0'">
+            <div class="signature-line" contenteditable="true">H. ACHMAD SUDIRMAN, S.H., M.H.</div>
         </div>
 
         <div class="kta-footer">
