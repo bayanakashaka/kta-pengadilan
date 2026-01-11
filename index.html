@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>KTA Pengadilan Kota Indopride - Fixed Layout</title>
+    <title>KTA Pengadilan Kota Indopride - Slim Header</title>
     <style>
         :root {
             --emerald: #004d40;
@@ -31,21 +31,21 @@
             border: 2px solid var(--border-gold);
         }
 
-        /* Watermark Logo Tengah */
+        /* Watermark */
         .watermark-center {
             position: absolute;
             top: 60%;
             left: 55%;
             transform: translate(-50%, -50%);
-            width: 170px;
-            height: 170px;
+            width: 160px;
+            height: 160px;
             opacity: 0.07;
             z-index: 1;
             pointer-events: none;
         }
         .watermark-center img { width: 100%; height: 100%; object-fit: contain; }
 
-        /* Sidebar Batik */
+        /* Sidebar */
         .side-batik {
             position: absolute;
             left: 0; top: 0; width: 45px; height: 100%;
@@ -60,93 +60,88 @@
         }
         .side-text { transform: rotate(-90deg); color: #fff; white-space: nowrap; font-size: 11px; font-weight: bold; letter-spacing: 2px; }
 
-        /* Header - 2 Logo Terkunci */
+        /* Header Dibuat Lebih Ramping (Slim) */
         .header {
             margin-left: 45px;
             background: var(--emerald);
-            height: 85px;
+            height: 70px; /* Dikurangi dari 85px */
             display: grid;
-            grid-template-columns: 70px 1fr 70px; /* Area logo kiri, teks, logo kanan */
+            grid-template-columns: 60px 1fr 60px;
             align-items: center;
-            padding: 0 10px;
-            border-bottom: 4px solid var(--border-gold);
+            padding: 0 15px;
+            border-bottom: 3px solid var(--border-gold);
             position: relative;
             z-index: 5;
         }
-        .logo-box { display: flex; justify-content: center; align-items: center; }
-        .logo-header { width: 50px; height: 50px; object-fit: contain; }
+        .logo-header { width: 45px; height: 45px; object-fit: contain; }
         
-        .header-text { text-align: center; }
-        .header-text h1 { margin: 0; font-size: 17px; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; }
-        .header-text p { margin: 2px 0 0; font-size: 9px; color: white; }
+        .header-text h1 { margin: 0; font-size: 16px; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; text-align: center; }
+        .header-text p { margin: 1px 0 0; font-size: 8.5px; color: white; text-align: center; }
 
-        /* Area Data Pegawai */
+        /* Area Konten */
         .main-content {
             margin-left: 45px;
-            padding: 20px;
+            padding: 15px 20px;
             display: flex;
             gap: 20px;
             position: relative;
             z-index: 5;
-            height: 150px; /* Kunci tinggi agar tidak nabrak bawah */
         }
         .photo-area {
-            width: 110px; height: 145px;
+            width: 105px; height: 140px;
             border: 2px solid var(--border-gold);
             background: #eee; cursor: pointer;
             overflow: hidden; flex-shrink: 0;
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
         }
         .photo-area img { width: 100%; height: 100%; object-fit: cover; }
 
         .details-grid {
             flex-grow: 1;
             display: grid;
-            grid-template-columns: 80px 10px 1fr;
-            row-gap: 8px;
+            grid-template-columns: 75px 10px 1fr;
+            row-gap: 6px;
             font-size: 14px;
-            align-content: start;
+            margin-top: 5px;
         }
         .label { font-weight: bold; color: var(--emerald); }
 
-        /* Area Tanda Tangan - Posisi Fix di Bawah */
+        /* Area Tanda Tangan Diturunkan */
         .bottom-right-container {
             position: absolute;
-            bottom: 45px;
+            bottom: 40px; /* Diturunkan lebih dekat ke footer */
             right: 25px;
-            width: 200px;
+            width: 190px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             z-index: 10;
         }
-        .ttd-img { height: 50px; margin: 2px 0; mix-blend-mode: multiply; }
+        .ttd-img { height: 48px; margin: 2px 0; mix-blend-mode: multiply; }
         .sign-line { 
             width: 100%; 
-            border-top: 1.5px solid #000; 
+            border-top: 1.2px solid #000; 
             font-weight: bold; 
-            font-size: 11px; 
-            padding-top: 4px; 
-            text-transform: uppercase; 
-            margin-top: 2px;
+            font-size: 10.5px; 
+            padding-top: 3px; 
+            text-transform: uppercase;
         }
 
-        /* Footer Barcode */
+        /* Footer */
         .footer-bar {
             position: absolute;
             bottom: 0; left: 45px; right: 0;
-            height: 35px;
+            height: 32px;
             background: #f4f4f4;
             display: flex;
             align-items: center;
             padding: 0 15px;
             justify-content: space-between;
             border-top: 1px solid #ddd;
-            z-index: 5;
         }
-        .kta-text { color: var(--emerald); font-weight: bold; font-size: 13px; }
-        .barcode-text { font-family: Arial; font-weight: bold; font-size: 10px; letter-spacing: 2px; }
+        .kta-text { color: var(--emerald); font-weight: bold; font-size: 12px; }
+        .barcode { font-family: Arial; font-weight: bold; font-size: 10px; letter-spacing: 2px; }
 
         [contenteditable="true"]:focus { outline: none; background: #fffde7; }
     </style>
@@ -163,23 +158,17 @@
         </div>
 
         <div class="header">
-            <div class="logo-box">
-                <img src="logo2.png" alt="L" class="logo-header" onerror="this.style.opacity='0'">
-            </div>
-            
+            <img src="logo.png" alt="L" class="logo-header" onerror="this.style.opacity='0'">
             <div class="header-text">
                 <h1 contenteditable="true">PENGADILAN KOTA INDOPRIDE</h1>
                 <p contenteditable="true">Jl. Occupation Avenue Kota Indopride – Kode Pos 7239</p>
             </div>
-
-            <div class="logo-box">
-                <img src="logo.png" alt="R" class="logo-header" onerror="this.style.opacity='0'">
-            </div>
+            <img src="logo_kanan.png" alt="R" class="logo-header" onerror="this.style.opacity='0'">
         </div>
 
         <div class="main-content">
             <label for="p-input" class="photo-area" id="p-view">
-                <div style="text-align:center; padding-top:60px; color:#999; font-size:9px;">Klik Ganti Foto</div>
+                <div style="text-align:center; padding-top:55px; color:#999; font-size:9px;">Ganti Foto</div>
             </label>
             <input type="file" id="p-input" hidden onchange="preview(event)">
 
@@ -194,12 +183,12 @@
         <div class="bottom-right-container">
             <div style="font-size: 10px;">Ketua Pengadilan,</div>
             <img src="ttd.png" alt=" " class="ttd-img" onerror="this.style.opacity='0'">
-            <div class="sign-line" contenteditable="true">KOWE GORILA</div>
+            <div class="sign-line" contenteditable="true">H. ACHMAD SUDIRMAN, S.H., M.H.</div>
         </div>
 
         <div class="footer-bar">
             <div class="kta-text">KARTU TANDA ANGGOTA</div>
-            <div class="barcode-text">|||| || | ||| || ||</div>
+            <div class="barcode">|||| || | ||| || ||</div>
         </div>
     </div>
 
