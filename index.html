@@ -1,281 +1,210 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>KTA Pengadilan Kota Indopride</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTA Pengadilan Kota Indopride</title>
+    <style>
+        :root {
+            --primary-green: #004d40;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --light-gray: #f4f4f4;
+        }
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Inter:wght@400;600&display=swap');
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #2c3e50;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
 
-body{
-    background:#cfcfcf;
-    font-family:'Inter',sans-serif;
-}
+        /* Container Kartu */
+        .id-card {
+            width: 500px;
+            height: 300px;
+            background-color: var(--white);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 5px solid var(--primary-green);
+        }
 
-.card{
-    width:1000px;
-    height:640px;
-    background:#fdfcf8;
-    margin:40px auto;
-    position:relative;
-    box-shadow:0 20px 40px rgba(0,0,0,.35);
-    overflow:hidden;
-}
+        /* Aksen Batik di Samping */
+        .batik-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/batik-thin.png'); /* Pattern batik subtle */
+            opacity: 0.1;
+            pointer-events: none;
+        }
 
-/* BATIK BORDER */
-.batik{
-    position:absolute;
-    left:0;
-    top:0;
-    width:90px;
-    height:100%;
-    background:
-      repeating-linear-gradient(
-        45deg,
-        rgba(17,77,60,.08),
-        rgba(17,77,60,.08) 10px,
-        transparent 10px,
-        transparent 20px
-      );
-}
+        .side-border {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 100%;
+            background-color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-/* HEADER */
-.header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:25px 40px 10px 130px;
-}
-.header img{height:70px}
+        /* Header */
+        .header {
+            background-color: var(--primary-green);
+            color: var(--gold);
+            padding: 10px 10px 10px 50px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+        }
 
-.header-center{
-    text-align:center;
-    flex:1;
-}
-.header-center h1{
-    font-family:'Libre Baskerville',serif;
-    font-size:28px;
-    margin:0;
-    color:#114d3c;
-    letter-spacing:1px;
-}
-.header-center p{
-    margin:6px 0 0;
-    font-size:13px;
-    color:#333;
-}
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
 
-/* CONTENT */
-.content{
-    display:flex;
-    padding:30px 40px 30px 130px;
-    gap:35px;
-}
+        .header p {
+            margin: 2px 0 0;
+            font-size: 9px;
+            color: var(--white);
+        }
 
-/* PHOTO */
-.photo{
-    width:260px;
-}
-.photo-box{
-    width:260px;
-    height:330px;
-    border:4px solid #c9a24d;
-    background:#000;
-    position:relative;
-}
-.photo-box img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-.photo-box input{
-    position:absolute;
-    inset:0;
-    opacity:0;
-    cursor:pointer;
-}
-.valid{
-    margin-top:10px;
-    background:#114d3c;
-    color:#fff;
-    text-align:center;
-    padding:10px;
-    font-weight:600;
-}
+        /* Konten Utama */
+        .card-body {
+            display: flex;
+            padding: 20px 20px 20px 60px;
+        }
 
-/* DATA */
-.data{
-    flex:1;
-}
-.label{
-    font-size:13px;
-    color:#555;
-    margin-top:14px;
-}
-.value{
-    font-family:'Libre Baskerville',serif;
-    font-size:22px;
-    color:#114d3c;
-}
+        .photo-space {
+            width: 110px;
+            height: 140px;
+            border: 2px solid var(--gold);
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-/* FORM */
-.form{display:none}
-.edit-mode .form{display:block}
+        .photo-space img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.form input{
-    width:100%;
-    padding:8px;
-    margin-top:6px;
-}
+        .info {
+            margin-left: 20px;
+            flex-grow: 1;
+        }
 
-/* FOOTER */
-.footer{
-    position:absolute;
-    bottom:30px;
-    left:130px;
-    right:40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-}
+        .info table {
+            font-size: 13px;
+            border-collapse: collapse;
+        }
 
-.signature{
-    text-align:left;
-}
-.signature img{
-    height:70px;
-}
-.signature .name{
-    font-family:'Libre Baskerville',serif;
-    font-size:16px;
-}
+        .info td {
+            padding: 3px 0;
+            vertical-align: top;
+        }
 
-.stamp img{
-    height:90px;
-    opacity:.85;
-}
+        .label {
+            font-weight: bold;
+            width: 80px;
+            color: var(--primary-green);
+        }
 
-/* EDIT BTN */
-#editBtn{
-    position:absolute;
-    top:15px;
-    right:20px;
-    font-size:12px;
-    padding:6px 14px;
-    cursor:pointer;
-}
+        /* Footer / Watermark */
+        .footer {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            text-align: right;
+        }
 
-/* PRINT */
-@media print{
-    body{background:#fff}
-    #editBtn,.form{display:none}
-    .card{box-shadow:none}
-}
-</style>
+        .kta-label {
+            position: absolute;
+            bottom: 10px;
+            left: 60px;
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .barcode {
+            width: 100px;
+            height: 30px;
+            background: linear-gradient(90deg, #000 5%, transparent 5%, transparent 10%, #000 10%, #000 15%, transparent 15%, transparent 25%, #000 25%, #000 35%, transparent 35%, transparent 40%, #000 40%, #000 55%, transparent 55%, transparent 60%, #000 60%, #000 70%, transparent 70%, transparent 80%, #000 80%);
+            margin-top: 5px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="card" id="card">
-<div class="batik"></div>
+    <div class="id-card">
+        <div class="batik-overlay"></div>
+        <div class="side-border">
+            <div style="transform: rotate(-90deg); color: white; font-size: 10px; white-space: nowrap; font-weight: bold;">
+                PENGADILAN NEGERI INDOPRIDE
+            </div>
+        </div>
 
-<button id="editBtn">EDIT DATA</button>
+        <div class="header">
+            <h1>Pengadilan Kota Indopride</h1>
+            <p>Jl. Occupation Avenue Kota Indopride – Kode Pos 7239</p>
+        </div>
 
-<div class="header">
-<img src="logo-pengadilan.png">
-<div class="header-center">
-<h1>PENGADILAN KOTA INDOPRIDE</h1>
-<p>Jl. Occupation Avenue Kota Indopride – Kode Pos 7239</p>
-</div>
-<img src="logo-ma.png">
-</div>
+        <div class="card-body">
+            <div class="photo-space">
+                <img src="https://via.placeholder.com/110x140?text=FOTO" alt="Foto Pegawai">
+            </div>
 
-<div class="content">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td class="label">NAMA</td>
+                        <td>:</td>
+                        <td style="text-transform: uppercase; font-weight: bold;">BUDI SANTOSO, S.H.</td>
+                    </tr>
+                    <tr>
+                        <td class="label">NIP</td>
+                        <td>:</td>
+                        <td>19850101 201001 1 001</td>
+                    </tr>
+                    <tr>
+                        <td class="label">JABATAN</td>
+                        <td>:</td>
+                        <td>Panitera Pengganti</td>
+                    </tr>
+                    <tr>
+                        <td class="label">BERLAKU</td>
+                        <td>:</td>
+                        <td>31 DESEMBER 2028</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-<div class="photo">
-<div class="photo-box">
-<img id="photoPreview" src="foto-default.png">
-<input type="file" id="photoInput" accept="image/*">
-</div>
-<div class="valid" id="validDate">BERLAKU HINGGA</div>
-</div>
+        <div class="kta-label">Kartu Tanda Anggota</div>
 
-<div class="data">
-
-<div class="form">
-<input id="namaInput" placeholder="Nama Lengkap">
-<input id="nipInput" placeholder="NIP / NIDN">
-<input id="jabatanInput" placeholder="Jabatan">
-<input id="validInput" type="date">
-</div>
-
-<div class="label">Nama Lengkap</div>
-<div class="value" id="namaDisplay">NAMA ANGGOTA</div>
-
-<div class="label">NIP / NIDN</div>
-<div class="value" id="nipDisplay">000000000</div>
-
-<div class="label">Jabatan</div>
-<div class="value" id="jabatanDisplay">JABATAN</div>
-
-</div>
-</div>
-
-<div class="footer">
-<div class="signature">
-<div>KEPALA PENGADILAN</div>
-<img src="signature.png">
-<div class="name">KOWE GORILA</div>
-</div>
-<div class="stamp">
-<img src="stamp.png">
-</div>
-</div>
-
-</div>
-
-<script>
-const card=document.getElementById("card");
-editBtn.onclick=()=>card.classList.toggle("edit-mode");
-
-function bind(i,d,k){
-const I=document.getElementById(i);
-const D=document.getElementById(d);
-if(localStorage[k]){
-I.value=localStorage[k];
-D.innerText=localStorage[k];
-}
-I.oninput=()=>{
-D.innerText=I.value;
-localStorage[k]=I.value;
-};
-}
-
-bind("namaInput","namaDisplay","ktaNama");
-bind("nipInput","nipDisplay","ktaNip");
-bind("jabatanInput","jabatanDisplay","ktaJabatan");
-
-validInput.onchange=()=>{
-localStorage.ktaValid=validInput.value;
-validDate.innerText="BERLAKU HINGGA\n"+
-new Date(validInput.value).toLocaleDateString("id-ID",
-{day:'2-digit',month:'long',year:'numeric'});
-};
-
-photoInput.onchange=()=>{
-const r=new FileReader();
-r.onload=e=>{
-photoPreview.src=e.target.result;
-localStorage.ktaPhoto=e.target.result;
-};
-r.readAsDataURL(photoInput.files[0]);
-};
-
-if(localStorage.ktaPhoto)photoPreview.src=localStorage.ktaPhoto;
-if(localStorage.ktaValid)validDate.innerText="BERLAKU HINGGA\n"+
-new Date(localStorage.ktaValid).toLocaleDateString("id-ID",
-{day:'2-digit',month:'long',year:'numeric'});
-</script>
+        <div class="footer">
+            <div style="font-size: 10px; margin-bottom: 25px;">Kepala Pengadilan,</div>
+            <div style="font-weight: bold; text-decoration: underline; font-size: 11px;">H. ACHMAD SUDIRMAN, S.H., M.H.</div>
+            <div class="barcode"></div>
+        </div>
+    </div>
 
 </body>
 </html>
