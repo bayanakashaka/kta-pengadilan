@@ -246,36 +246,49 @@
             background: #fffde7;
         }
 @media print {
+
     @page {
-        size: 566px 346px;
+        size: 90mm 55mm;   /* ukuran kartu ID real */
         margin: 0;
     }
 
-    body {
+    html, body {
+        width: 90mm;
+        height: 55mm;
         margin: 0;
         padding: 0;
         background: none !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        overflow: hidden;
     }
 
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* sembunyikan teks instruksi */
     body > div:first-child {
         display: none;
     }
 
-    /* INI KUNCI NYA */
+    /* INI YANG PALING PENTING */
     .card-frame {
+        width: 90mm;
+        height: 55mm;
         border-radius: 28px;
-        overflow: hidden;      /* ⬅️ WAJIB */
+        overflow: hidden;          /* ⬅️ WAJIB */
+        page-break-inside: avoid;  /* ⬅️ STOP JADI 2 HALAMAN */
+        break-inside: avoid;
         box-shadow: none !important;
     }
 
     .card {
+        width: 100%;
+        height: 100%;
         border-radius: 20px;
     }
 }
-
 
     </style>
 </head>
@@ -365,6 +378,7 @@
 </body>
 
 </html>
+
 
 
 
