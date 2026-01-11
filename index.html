@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>KTA Pengadilan Kota Indopride - Spasi Rapat</title>
+    <title>KTA Pengadilan Kota Indopride - Perfect Symmetry</title>
     <style>
         :root {
             --emerald: #004d40;
@@ -29,6 +29,8 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.8);
             overflow: hidden;
             border: 2px solid var(--border-gold);
+            display: flex;
+            flex-direction: column;
         }
 
         /* Watermark */
@@ -39,7 +41,7 @@
             transform: translate(-50%, -50%);
             width: 150px;
             height: 150px;
-            opacity: 0.07;
+            opacity: 0.06;
             z-index: 1;
             pointer-events: none;
         }
@@ -60,88 +62,95 @@
         }
         .side-text { transform: rotate(-90deg); color: #fff; white-space: nowrap; font-size: 11px; font-weight: bold; letter-spacing: 2px; }
 
-        /* Header Slim */
+        /* Header Slim & Center */
         .header {
             margin-left: 45px;
             background: var(--emerald);
-            height: 65px; /* Lebih ramping lagi */
-            display: grid;
-            grid-template-columns: 55px 1fr 55px;
+            height: 70px;
+            display: flex;
             align-items: center;
-            padding: 0 15px;
+            justify-content: space-between;
+            padding: 0 20px;
             border-bottom: 3px solid var(--border-gold);
+            z-index: 5;
+        }
+        .logo-header { width: 45px; height: 45px; object-fit: contain; }
+        .header-text { text-align: center; flex-grow: 1; }
+        .header-text h1 { margin: 0; font-size: 16px; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; }
+        .header-text p { margin: 2px 0 0; font-size: 8px; color: white; }
+
+        /* Body Container - Kunci Simetrisitas */
+        .main-body {
+            margin-left: 45px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center; /* Menjaga semua konten sejajar di tengah secara vertikal */
+            padding: 0 20px;
             position: relative;
             z-index: 5;
         }
-        .logo-header { width: 42px; height: 42px; object-fit: contain; }
-        .header-text h1 { margin: 0; font-size: 16px; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; text-align: center; }
-        .header-text p { margin: 1px 0 0; font-size: 8px; color: white; text-align: center; }
 
-        /* Area Konten */
-        .main-content {
-            margin-left: 45px;
-            padding: 10px 20px; /* Padding dikurangi */
+        .left-content {
             display: flex;
             gap: 15px;
-            position: relative;
-            z-index: 5;
+            align-items: flex-start;
+            flex: 1;
         }
+
         .photo-area {
-            width: 100px; height: 135px;
+            width: 100px;
+            height: 130px;
             border: 2px solid var(--border-gold);
-            background: #eee; cursor: pointer;
-            overflow: hidden; flex-shrink: 0;
-            box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+            background: #eee;
+            overflow: hidden;
+            flex-shrink: 0;
+            cursor: pointer;
         }
         .photo-area img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Grid Data Super Rapat */
+        /* Data Pegawai - Spasi Sangat Rapat */
         .details-grid {
-            flex-grow: 1;
             display: grid;
-            grid-template-columns: 60px 10px 1fr; /* Kolom label dipersempit jadi 60px */
-            row-gap: 2px; /* Spasi vertikal antar baris dipersempit */
-            font-size: 14px;
-            align-content: start;
+            grid-template-columns: auto auto 1fr;
+            column-gap: 5px;
+            row-gap: 3px; /* Spasi vertikal antar baris sangat rapat */
+            font-size: 13px;
         }
-        .label { font-weight: bold; color: var(--emerald); }
+        .label { font-weight: bold; color: var(--emerald); min-width: 60px; }
 
-        /* Area Tanda Tangan Simetris di Pojok */
-        .bottom-right-container {
-            position: absolute;
-            bottom: 35px; /* Lebih turun mepet footer */
-            right: 20px;
+        /* Sisi Kanan (Tanda Tangan) */
+        .right-content {
             width: 180px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            z-index: 10;
+            margin-top: 40px; /* Menyesuaikan posisi agar sejajar dengan baris bawah data */
         }
-        .ttd-img { height: 45px; margin: 0; mix-blend-mode: multiply; }
+        .ttd-img { height: 45px; margin: 2px 0; mix-blend-mode: multiply; }
         .sign-line { 
             width: 100%; 
-            border-top: 1.2px solid #000; 
+            border-top: 1.5px solid #000; 
             font-weight: bold; 
             font-size: 10px; 
-            padding-top: 2px; 
+            padding-top: 3px; 
             text-transform: uppercase;
         }
 
         /* Footer */
         .footer-bar {
-            position: absolute;
-            bottom: 0; left: 45px; right: 0;
-            height: 30px;
+            margin-left: 45px;
+            height: 35px;
             background: #f4f4f4;
             display: flex;
             align-items: center;
             padding: 0 15px;
             justify-content: space-between;
             border-top: 1px solid #ddd;
+            z-index: 5;
         }
         .kta-text { color: var(--emerald); font-weight: bold; font-size: 11px; }
-        .barcode { font-family: Arial; font-weight: bold; font-size: 9px; letter-spacing: 2px; }
+        .barcode { font-family: Arial; font-weight: bold; font-size: 10px; letter-spacing: 2px; }
 
         [contenteditable="true"]:focus { outline: none; background: #fffde7; }
     </style>
@@ -150,7 +159,7 @@
 
     <div class="card">
         <div class="watermark-center">
-            <img src="logo.png" alt="" onerror="this.style.display='none'">
+            <img src="logo.png" alt="">
         </div>
 
         <div class="side-batik">
@@ -158,32 +167,34 @@
         </div>
 
         <div class="header">
-            <img src="logo2.png" alt="L" class="logo-header">
+            <img src="logo1.png" alt="L" class="logo-header">
             <div class="header-text">
                 <h1 contenteditable="true">PENGADILAN KOTA INDOPRIDE</h1>
                 <p contenteditable="true">Jl. Occupation Avenue Kota Indopride – Kode Pos 7239</p>
             </div>
-            <img src="logo.png" alt="R" class="logo-header">
+            <img src="logo2.png" alt="R" class="logo-header">
         </div>
 
-        <div class="main-content">
-            <label for="p-input" class="photo-area" id="p-view">
-                <div style="text-align:center; padding-top:50px; color:#999; font-size:8px;">Ganti Foto</div>
-            </label>
-            <input type="file" id="p-input" hidden onchange="preview(event)">
+        <div class="main-body">
+            <div class="left-content">
+                <label for="p-input" class="photo-area" id="p-view">
+                    <div style="text-align:center; padding-top:50px; color:#999; font-size:8px;">Klik Foto</div>
+                </label>
+                <input type="file" id="p-input" hidden onchange="preview(event)">
 
-            <div class="details-grid">
-                <div class="label">NAMA</div> <div>:</div> <div contenteditable="true">BUDI SANTOSO, S.H.</div>
-                <div class="label">NIP</div> <div>:</div> <div contenteditable="true">19850101 201001 1 001</div>
-                <div class="label">JABATAN</div> <div>:</div> <div contenteditable="true">Panitera Pengganti</div>
-                <div class="label">BERLAKU</div> <div>:</div> <div contenteditable="true">31 DESEMBER 2028</div>
+                <div class="details-grid">
+                    <div class="label">NAMA</div> <div>:</div> <div contenteditable="true">BUDI SANTOSO, S.H.</div>
+                    <div class="label">NIP</div> <div>:</div> <div contenteditable="true">19850101 201001 1 001</div>
+                    <div class="label">JABATAN</div> <div>:</div> <div contenteditable="true">Panitera Pengganti</div>
+                    <div class="label">BERLAKU</div> <div>:</div> <div contenteditable="true">31 DESEMBER 2028</div>
+                </div>
             </div>
-        </div>
 
-        <div class="bottom-right-container">
-            <div style="font-size: 9px;">Ketua Pengadilan,</div>
-            <img src="ttd.png" alt=" " class="ttd-img" onerror="this.style.opacity='0'">
-            <div class="sign-line" contenteditable="true">KOWE GORILA</div>
+            <div class="right-content">
+                <div style="font-size: 10px;">Ketua Pengadilan,</div>
+                <img src="ttd.png" alt=" " class="ttd-img" onerror="this.style.opacity='0'">
+                <div class="sign-line" contenteditable="true">KOWE GORILA</div>
+            </div>
         </div>
 
         <div class="footer-bar">
