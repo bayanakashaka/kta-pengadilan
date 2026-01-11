@@ -245,29 +245,30 @@
             outline: none;
             background: #fffde7;
         }
-        @media print {
+@media print {
     @page {
-        size: auto;
+        size: 566px 346px;
         margin: 0;
     }
 
     body {
-        background: none !important;
         margin: 0;
         padding: 0;
-        display: block;
+        background: none !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     body > div:first-child {
-        display: none; /* teks petunjuk */
+        display: none;
     }
 
     .card-frame {
         box-shadow: none !important;
-        margin: 0 auto;
-        page-break-after: always;
     }
 }
+
 
     </style>
 </head>
@@ -304,16 +305,16 @@
                 <div class="details-grid">
                     <div class="label">NAMA</div>
                     <div>:</div>
-                    <div class="value" contenteditable="true">BUDI SANTOSO, S.H.</div>
+                    <div class="value" contenteditable="true">GANTI NAMAMU</div>
                     <div class="label">NIP</div>
                     <div>:</div>
-                    <div class="value" contenteditable="true">19850101 201001 1 001</div>
+                    <div class="value" contenteditable="true">GANTI NO KTA MU</div>
                     <div class="label">JABATAN</div>
                     <div>:</div>
-                    <div class="value" contenteditable="true">Panitera Pengganti</div>
+                    <div class="value" contenteditable="true">GANTI JABATANMU</div>
                     <div class="label">BERLAKU</div>
                     <div>:</div>
-                    <div class="value" contenteditable="true">31 DESEMBER 2028</div>
+                    <div class="value" contenteditable="true">GANTI JUGA TGL BERLAKUNYA</div>
                 </div>
             </div>
 
@@ -357,4 +358,5 @@
 </body>
 
 </html>
+
 
