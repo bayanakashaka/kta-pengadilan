@@ -5,149 +5,81 @@
 <title>KTA Pengadilan Kota Indopride</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Merriweather:wght@700&family=Inter:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Inter:wght@400;600&display=swap');
 
 body{
-    background:#bfbfbf;
+    background:#cfcfcf;
     font-family:'Inter',sans-serif;
 }
 
 .card{
     width:1000px;
-    height:650px;
-    background:#f7f4ee;
+    height:640px;
+    background:#fdfcf8;
     margin:40px auto;
-    box-shadow:0 20px 40px rgba(0,0,0,.35);
     position:relative;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    overflow:hidden;
+}
+
+/* BATIK BORDER */
+.batik{
+    position:absolute;
+    left:0;
+    top:0;
+    width:90px;
+    height:100%;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(17,77,60,.08),
+        rgba(17,77,60,.08) 10px,
+        transparent 10px,
+        transparent 20px
+      );
 }
 
 /* HEADER */
 .header{
-    background:linear-gradient(90deg,#000,#222);
-    color:#fff;
-    padding:25px 40px;
     display:flex;
     align-items:center;
-}
-.header img{height:70px;margin-right:25px}
-.header h1{
-    font-family:'Cinzel',serif;
-    font-size:38px;
-    margin:0;
-    letter-spacing:2px;
-}
-.header p{margin-top:6px;font-size:15px}
-
-/* STRIP */
-.strip{
-    background:#6b1115;
-    color:#fff;
-    padding:14px 40px;
-    display:flex;
     justify-content:space-between;
-    font-weight:700;
-    letter-spacing:1.5px;
+    padding:25px 40px 10px 130px;
 }
+.header img{height:70px}
 
-/* EDIT */
-#editBtn{
-    position:absolute;
-    top:175px;
-    right:40px;
-    padding:7px 16px;
+.header-center{
+    text-align:center;
+    flex:1;
+}
+.header-center h1{
+    font-family:'Libre Baskerville',serif;
+    font-size:28px;
+    margin:0;
+    color:#114d3c;
+    letter-spacing:1px;
+}
+.header-center p{
+    margin:6px 0 0;
     font-size:13px;
-    cursor:pointer;
-    z-index:10;
+    color:#333;
 }
 
 /* CONTENT */
 .content{
     display:flex;
-    padding:40px;
-    position:relative;
-}
-
-/* WATERMARK */
-.watermark{
-    position:absolute;
-    top:50%;
-    left:50%;
-    width:520px;
-    opacity:.06;
-    transform:translate(-50%,-50%);
-}
-
-/* LEFT */
-.left{width:65%;z-index:1}
-.block{
-    background:#ece8df;
-    padding:34px 38px;
-    border-left:7px solid #caa24a;
-}
-.block small{
-    font-weight:700;
-    letter-spacing:1.2px;
-    color:#6b1115;
-    font-size:13px;
-}
-
-/* TEXT */
-.name{
-    font-family:'Merriweather',serif;
-    font-size:40px;
-    margin:14px 0;
-}
-.divisi{
-    font-size:22px;
-    font-weight:600;
-}
-.address{
-    font-size:15px;
-    margin-top:10px;
-    opacity:.9;
-}
-
-/* FORM – FIXED */
-.form{
-    display:none;
-    margin-bottom:14px;
-}
-.edit-mode .form{
-    display:block;
-}
-.form input{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    font-size:15px;
-}
-
-/* SIGNATURE – KIRI & BESAR */
-.signature{
-    margin-top:48px;
-}
-.signature .title{
-    font-size:15px;
-    font-weight:700;
-    letter-spacing:1.5px;
-}
-.signature img{
-    height:95px;
-    margin:10px 0;
-}
-.signature .name{
-    font-family:'Cinzel',serif;
-    font-size:22px;
+    padding:30px 40px 30px 130px;
+    gap:35px;
 }
 
 /* PHOTO */
-.photo{width:280px;margin-left:auto;z-index:1}
+.photo{
+    width:260px;
+}
 .photo-box{
     width:260px;
     height:330px;
-    border:5px solid #6b1115;
-    outline:3px solid #caa24a;
-    outline-offset:-10px;
+    border:4px solid #c9a24d;
     background:#000;
     position:relative;
 }
@@ -163,13 +95,74 @@ body{
     cursor:pointer;
 }
 .valid{
-    background:#6b1115;
+    margin-top:10px;
+    background:#114d3c;
     color:#fff;
     text-align:center;
-    padding:14px;
-    margin-top:12px;
-    font-weight:700;
-    letter-spacing:1.2px;
+    padding:10px;
+    font-weight:600;
+}
+
+/* DATA */
+.data{
+    flex:1;
+}
+.label{
+    font-size:13px;
+    color:#555;
+    margin-top:14px;
+}
+.value{
+    font-family:'Libre Baskerville',serif;
+    font-size:22px;
+    color:#114d3c;
+}
+
+/* FORM */
+.form{display:none}
+.edit-mode .form{display:block}
+
+.form input{
+    width:100%;
+    padding:8px;
+    margin-top:6px;
+}
+
+/* FOOTER */
+.footer{
+    position:absolute;
+    bottom:30px;
+    left:130px;
+    right:40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+}
+
+.signature{
+    text-align:left;
+}
+.signature img{
+    height:70px;
+}
+.signature .name{
+    font-family:'Libre Baskerville',serif;
+    font-size:16px;
+}
+
+.stamp img{
+    height:90px;
+    opacity:.85;
+}
+
+/* EDIT BTN */
+#editBtn{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:12px;
+    padding:6px 14px;
+    cursor:pointer;
 }
 
 /* PRINT */
@@ -184,50 +177,20 @@ body{
 <body>
 
 <div class="card" id="card">
-
-<div class="header">
-    <img src="logo.png">
-    <div>
-        <h1>KARTU TANDA ANGGOTA</h1>
-        <p>PENGADILAN KOTA INDOPRIDE</p>
-    </div>
-</div>
-
-<div class="strip">
-    <span>PERANGKAT PENGADILAN</span>
-    <span id="nomor"></span>
-</div>
+<div class="batik"></div>
 
 <button id="editBtn">EDIT DATA</button>
 
+<div class="header">
+<img src="logo-pengadilan.png">
+<div class="header-center">
+<h1>PENGADILAN KOTA INDOPRIDE</h1>
+<p>Jl. Occupation Avenue Kota Indopride – Kode Pos 7239</p>
+</div>
+<img src="logo-ma.png">
+</div>
+
 <div class="content">
-<img src="scales.png" class="watermark">
-
-<div class="left">
-
-<div class="block">
-<small>LEMBAGA KEHAKIMAN</small>
-
-<div class="form">
-<input id="namaInput" placeholder="Nama Anggota">
-<input id="jabatanInput" placeholder="Jabatan">
-<input id="validInput" type="date">
-</div>
-
-<div class="name" id="namaDisplay">NAMA ANGGOTA</div>
-<div class="divisi" id="jabatanDisplay">JABATAN</div>
-<div class="address">
-Jl. Occupation Avenue Kota Indopride – Kode Pos 7239
-</div>
-</div>
-
-<div class="signature">
-<div class="title">KEPALA PENGADILAN</div>
-<img src="signature.png">
-<div class="name">KOWE GORILA</div>
-</div>
-
-</div>
 
 <div class="photo">
 <div class="photo-box">
@@ -237,78 +200,81 @@ Jl. Occupation Avenue Kota Indopride – Kode Pos 7239
 <div class="valid" id="validDate">BERLAKU HINGGA</div>
 </div>
 
+<div class="data">
+
+<div class="form">
+<input id="namaInput" placeholder="Nama Lengkap">
+<input id="nipInput" placeholder="NIP / NIDN">
+<input id="jabatanInput" placeholder="Jabatan">
+<input id="validInput" type="date">
 </div>
+
+<div class="label">Nama Lengkap</div>
+<div class="value" id="namaDisplay">NAMA ANGGOTA</div>
+
+<div class="label">NIP / NIDN</div>
+<div class="value" id="nipDisplay">000000000</div>
+
+<div class="label">Jabatan</div>
+<div class="value" id="jabatanDisplay">JABATAN</div>
+
+</div>
+</div>
+
+<div class="footer">
+<div class="signature">
+<div>KEPALA PENGADILAN</div>
+<img src="signature.png">
+<div class="name">KOWE GORILA</div>
+</div>
+<div class="stamp">
+<img src="stamp.png">
+</div>
+</div>
+
 </div>
 
 <script>
 const card=document.getElementById("card");
-const btn=document.getElementById("editBtn");
+editBtn.onclick=()=>card.classList.toggle("edit-mode");
 
-btn.onclick=()=>{
-    card.classList.toggle("edit-mode");
-    btn.innerText = card.classList.contains("edit-mode")
-        ? "SELESAI"
-        : "EDIT DATA";
+function bind(i,d,k){
+const I=document.getElementById(i);
+const D=document.getElementById(d);
+if(localStorage[k]){
+I.value=localStorage[k];
+D.innerText=localStorage[k];
+}
+I.oninput=()=>{
+D.innerText=I.value;
+localStorage[k]=I.value;
+};
+}
+
+bind("namaInput","namaDisplay","ktaNama");
+bind("nipInput","nipDisplay","ktaNip");
+bind("jabatanInput","jabatanDisplay","ktaJabatan");
+
+validInput.onchange=()=>{
+localStorage.ktaValid=validInput.value;
+validDate.innerText="BERLAKU HINGGA\n"+
+new Date(validInput.value).toLocaleDateString("id-ID",
+{day:'2-digit',month:'long',year:'numeric'});
 };
 
-/* NOMOR */
-if(!localStorage.getItem("ktaNumber")){
-    const y=new Date().getFullYear();
-    const r=Math.floor(100000+Math.random()*900000);
-    localStorage.setItem("ktaNumber",`PN-IDP-${y}-${r}`);
-}
-document.getElementById("nomor").innerText=
-"NO. "+localStorage.getItem("ktaNumber");
-
-/* DATA */
-function bind(i,d,k,def){
-    const I=document.getElementById(i);
-    const D=document.getElementById(d);
-    const v=localStorage.getItem(k);
-    D.innerText=v||def;
-    I.value=v||"";
-    I.oninput=()=>{
-        D.innerText=I.value||def;
-        localStorage.setItem(k,I.value);
-    };
-}
-bind("namaInput","namaDisplay","ktaNama","NAMA ANGGOTA");
-bind("jabatanInput","jabatanDisplay","ktaJabatan","JABATAN");
-
-/* TANGGAL */
-const vI=document.getElementById("validInput");
-const vD=document.getElementById("validDate");
-if(localStorage.getItem("ktaValid")){
-    vI.value=localStorage.getItem("ktaValid");
-    setDate(vI.value);
-}
-vI.onchange=()=>{
-    localStorage.setItem("ktaValid",vI.value);
-    setDate(vI.value);
+photoInput.onchange=()=>{
+const r=new FileReader();
+r.onload=e=>{
+photoPreview.src=e.target.result;
+localStorage.ktaPhoto=e.target.result;
 };
-function setDate(v){
-    if(!v)return;
-    vD.innerText="BERLAKU HINGGA\n"+
-    new Date(v).toLocaleDateString("id-ID",
-    {day:'2-digit',month:'long',year:'numeric'});
-}
-
-/* FOTO */
-const pI=document.getElementById("photoInput");
-const pP=document.getElementById("photoPreview");
-if(localStorage.getItem("ktaPhoto")){
-    pP.src=localStorage.getItem("ktaPhoto");
-}
-pI.onchange=()=>{
-    const f=pI.files[0];
-    if(!f)return;
-    const r=new FileReader();
-    r.onload=e=>{
-        pP.src=e.target.result;
-        localStorage.setItem("ktaPhoto",e.target.result);
-    };
-    r.readAsDataURL(f);
+r.readAsDataURL(photoInput.files[0]);
 };
+
+if(localStorage.ktaPhoto)photoPreview.src=localStorage.ktaPhoto;
+if(localStorage.ktaValid)validDate.innerText="BERLAKU HINGGA\n"+
+new Date(localStorage.ktaValid).toLocaleDateString("id-ID",
+{day:'2-digit',month:'long',year:'numeric'});
 </script>
 
 </body>
