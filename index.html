@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>KTA Pengadilan Kota Indopride - Rapih & Simetris</title>
+    <title>KTA Pengadilan Kota Indopride - Spasi Rapat</title>
     <style>
         :root {
             --emerald: #004d40;
@@ -37,8 +37,8 @@
             top: 60%;
             left: 55%;
             transform: translate(-50%, -50%);
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             opacity: 0.07;
             z-index: 1;
             pointer-events: none;
@@ -64,74 +64,75 @@
         .header {
             margin-left: 45px;
             background: var(--emerald);
-            height: 70px;
+            height: 65px; /* Lebih ramping lagi */
             display: grid;
-            grid-template-columns: 60px 1fr 60px;
+            grid-template-columns: 55px 1fr 55px;
             align-items: center;
             padding: 0 15px;
             border-bottom: 3px solid var(--border-gold);
             position: relative;
             z-index: 5;
         }
-        .logo-header { width: 45px; height: 45px; object-fit: contain; }
+        .logo-header { width: 42px; height: 42px; object-fit: contain; }
         .header-text h1 { margin: 0; font-size: 16px; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; text-align: center; }
-        .header-text p { margin: 1px 0 0; font-size: 8.5px; color: white; text-align: center; }
+        .header-text p { margin: 1px 0 0; font-size: 8px; color: white; text-align: center; }
 
-        /* Area Konten - Perbaikan Spasi Data */
+        /* Area Konten */
         .main-content {
             margin-left: 45px;
-            padding: 15px 20px;
+            padding: 10px 20px; /* Padding dikurangi */
             display: flex;
             gap: 15px;
             position: relative;
             z-index: 5;
         }
         .photo-area {
-            width: 105px; height: 140px;
+            width: 100px; height: 135px;
             border: 2px solid var(--border-gold);
             background: #eee; cursor: pointer;
             overflow: hidden; flex-shrink: 0;
-            box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
         }
         .photo-area img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Kolom Label dipersempit (70px) agar merapat */
+        /* Grid Data Super Rapat */
         .details-grid {
             flex-grow: 1;
             display: grid;
-            grid-template-columns: 70px 10px 1fr; 
-            row-gap: 5px;
+            grid-template-columns: 60px 10px 1fr; /* Kolom label dipersempit jadi 60px */
+            row-gap: 2px; /* Spasi vertikal antar baris dipersempit */
             font-size: 14px;
-            margin-top: 5px;
+            align-content: start;
         }
         .label { font-weight: bold; color: var(--emerald); }
 
-        /* Area Tanda Tangan - Diturunkan Maksimal */
+        /* Area Tanda Tangan Simetris di Pojok */
         .bottom-right-container {
             position: absolute;
-            bottom: 38px; 
-            right: 25px;
-            width: 190px;
+            bottom: 35px; /* Lebih turun mepet footer */
+            right: 20px;
+            width: 180px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             z-index: 10;
         }
-        .ttd-img { height: 48px; margin: 2px 0; mix-blend-mode: multiply; }
+        .ttd-img { height: 45px; margin: 0; mix-blend-mode: multiply; }
         .sign-line { 
             width: 100%; 
             border-top: 1.2px solid #000; 
             font-weight: bold; 
-            font-size: 10.5px; 
-            padding-top: 3px; 
+            font-size: 10px; 
+            padding-top: 2px; 
             text-transform: uppercase;
         }
 
+        /* Footer */
         .footer-bar {
             position: absolute;
             bottom: 0; left: 45px; right: 0;
-            height: 32px;
+            height: 30px;
             background: #f4f4f4;
             display: flex;
             align-items: center;
@@ -139,8 +140,8 @@
             justify-content: space-between;
             border-top: 1px solid #ddd;
         }
-        .kta-text { color: var(--emerald); font-weight: bold; font-size: 12px; }
-        .barcode { font-family: Arial; font-weight: bold; font-size: 10px; letter-spacing: 2px; }
+        .kta-text { color: var(--emerald); font-weight: bold; font-size: 11px; }
+        .barcode { font-family: Arial; font-weight: bold; font-size: 9px; letter-spacing: 2px; }
 
         [contenteditable="true"]:focus { outline: none; background: #fffde7; }
     </style>
@@ -157,17 +158,17 @@
         </div>
 
         <div class="header">
-            <img src="logo2.png" alt="L" class="logo-header" onerror="this.style.opacity='0'">
+            <img src="logo2.png" alt="L" class="logo-header">
             <div class="header-text">
                 <h1 contenteditable="true">PENGADILAN KOTA INDOPRIDE</h1>
                 <p contenteditable="true">Jl. Occupation Avenue Kota Indopride – Kode Pos 7239</p>
             </div>
-            <img src="logo.png" alt="R" class="logo-header" onerror="this.style.opacity='0'">
+            <img src="logo.png" alt="R" class="logo-header">
         </div>
 
         <div class="main-content">
             <label for="p-input" class="photo-area" id="p-view">
-                <div style="text-align:center; padding-top:55px; color:#999; font-size:9px;">Ganti Foto</div>
+                <div style="text-align:center; padding-top:50px; color:#999; font-size:8px;">Ganti Foto</div>
             </label>
             <input type="file" id="p-input" hidden onchange="preview(event)">
 
@@ -180,7 +181,7 @@
         </div>
 
         <div class="bottom-right-container">
-            <div style="font-size: 10px;">Ketua Pengadilan,</div>
+            <div style="font-size: 9px;">Ketua Pengadilan,</div>
             <img src="ttd.png" alt=" " class="ttd-img" onerror="this.style.opacity='0'">
             <div class="sign-line" contenteditable="true">KOWE GORILA</div>
         </div>
