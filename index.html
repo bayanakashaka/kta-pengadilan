@@ -180,38 +180,39 @@
         }
 
 
-.ttd-area {
-    width: 170px;              /* ⬅️ bebas, lebih panjang dari foto */
-    height: 46px;
-    margin-top: 2px;
-    margin-left: -30px;        /* ⬅️ geser ke kiri biar center di foto */
-    background: transparent;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.photo-ttd-column {
+    width: 110px;      /* tetap ukuran foto */
+    position: relative;
 }
+
+.ttd-wrapper {
+    position: absolute;
+    top: 150px;        /* tepat di bawah foto */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;      /* ⬅️ TTD BEBAS PANJANG */
+    height: 46px;
+    pointer-events: auto;
+}
+
 .ttd-input {
     width: 100%;
+    height: 100%;
     border: none;
     background: transparent;
     text-align: center;
 
     font-family: 'Delycost', cursive;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;          /* ⬅️ lebih tegas */
     color: #000;
+
+    line-height: 1.4;
+    padding-top: 6px;
+    resize: none;
     outline: none;
-
-    line-height: 1.2;
-    padding-top: 8px;
-
-    /* ⬇️ INI KUNCINYA */
-    white-space: nowrap;       /* PAKSA 1 BARIS */
-    overflow: hidden;          /* jangan keluar */
-    text-overflow: clip;       /* jangan titik-titik */
+    overflow: hidden;
 }
-
 
 
         .photo-area img {
@@ -374,11 +375,10 @@
                     </label>
                     <input type="file" id="photo-input" hidden accept="image/*" onchange="previewPhoto(event)">
 
-                    <!-- TTD -->
-                    <div class="ttd-area">
-                        <textarea class="ttd-input" rows="2" placeholder="Tanda Tangan"></textarea>
-                    </div>
-
+                  <div class="ttd-wrapper">
+        <textarea class="ttd-input" placeholder="Tanda Tangan"></textarea>
+    </div>
+</div>
 
                 </div>
 
@@ -438,6 +438,7 @@
 
     </script>
 </body>
+
 
 
 
