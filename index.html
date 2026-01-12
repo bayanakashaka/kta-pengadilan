@@ -180,19 +180,17 @@
         }
 
 
-        ..ttd-area {
-    width: 190px;              /* ⬅️ lebih panjang */
-    height: 52px;              /* ⬅️ cukup untuk 2 baris */
+.ttd-area {
+    width: 170px;              /* ⬅️ bebas, lebih panjang dari foto */
+    height: 46px;
     margin-top: 2px;
-    margin-left: -25px;
+    margin-left: -30px;        /* ⬅️ geser ke kiri biar center di foto */
     background: transparent;
 
     display: flex;
-    align-items: flex-start;   /* ⬅️ jangan center, biar gak kepotong */
+    align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
-
 .ttd-input {
     width: 100%;
     border: none;
@@ -440,6 +438,7 @@
 
     </script>
 </body>
+
 
 
 
