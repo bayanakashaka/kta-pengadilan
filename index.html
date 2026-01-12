@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <title>KTA Pengadilan Kota Indopride</title>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --emerald: #004d40;
+            --emerald: #013c32;
             --gold-grad: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --border-gold: #bf953f;
             /* URL Gambar Pola dari Freepik */
@@ -83,7 +83,7 @@
             transform: rotate(-90deg);
             color: #fff;
             white-space: nowrap;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: bold;
             letter-spacing: 2px;
             background: var(--gold-grad);
@@ -155,23 +155,79 @@
             z-index: 5;
         }
 
+        .photo-ttd-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+        }
+
         .photo-area {
             width: 110px;
             height: 145px;
             border: 2px solid var(--border-gold);
             background: #eee;
-            cursor: pointer;
             overflow: hidden;
-            flex-shrink: 0;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
         }
 
         .photo-area img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
+        }
+
+
+        .ttd-area {
+            width: 170px;
+            height: 46px;
+            /* ⬅️ tambah tinggi dikit */
+            margin-top: 2px;
+            margin-left: -25px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ttd-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 20px;
+            color: #000;
+            outline: none;
+
+            line-height: 1.3;
+            /* ⬅️ INI KUNCI: biar huruf atas gak kepotong */
+            padding-top: 6px;
+            /* ⬅️ kasih napas ke atas */
+            padding-bottom: 0;
+
+            resize: none;
+            white-space: normal;
+            word-break: break-word;
+            overflow: hidden;
+        }
+
+
+        .photo-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-ttd-column {
+            width: 110px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hint {
+            font-size: 9px;
+            color: #999;
+            text-align: center;
+            line-height: 40px;
         }
 
         .details-grid {
@@ -191,7 +247,7 @@
         .value {
             font-family: 'times new roman', Courier, monospace;
             font-weight: bold;
-            color: #575252;
+            color: #3b3a3a;
         }
 
         .bottom-section {
@@ -216,8 +272,6 @@
         .bottom-section {
             position: absolute;
         }
-
-
 
         .sign-line {
             width: 100%;
@@ -259,7 +313,7 @@
 
         @media print {
             @page {
-                size: 560px 340px;
+                size: 553px 332px;
                 margin: 0;
             }
 
@@ -285,7 +339,7 @@
 </head>
 
 <body>
-    <div style="color: #130f0f; font-size: 12px; margin-bottom: 10px; font-family: Arial;">
+    <div style="color: #f6f0f0; font-size: 15px; margin-bottom: 10px; font-family: Arial;">
         *Klik teks untuk edit | Klik kotak foto untuk ganti foto kamu
     </div>
     <div class="card-frame">
@@ -308,11 +362,23 @@
             </div>
 
             <div class="main-container">
-                <label for="p-input" class="photo-area" id="p-view">
-                    <div style="text-align:center; padding-top:50px; color:#999; font-size:10px;">Klik Ganti Foto
-                        terbaikmu</div>
-                </label>
-                <input type="file" id="p-input" hidden onchange="preview(event)">
+                <div class="photo-ttd-column">
+
+                    <!-- FOTO -->
+                    <label for="photo-input" class="photo-area" id="photo-view">
+                        <div style="text-align:center; padding-top:50px; color:#999; font-size:10px;">Klik Disini <br>
+                            Dan Ganti Foto Kamu</div>
+                    </label>
+                    <input type="file" id="photo-input" hidden accept="image/*" onchange="previewPhoto(event)">
+
+                    <!-- TTD -->
+                    <div class="ttd-area">
+                        <textarea class="ttd-input" rows="2" placeholder="Tanda Tangan"></textarea>
+                    </div>
+
+
+                </div>
+
 
                 <div class="details-grid">
                     <div class="label">NAMA</div>
@@ -333,9 +399,7 @@
 
             <div class="bottom-section">
                 <div style="font-size:10px;">Ketua Pengadilan,</div>
-                <!-- TTD -->
                 <img src="ttd.png" class="ttd-img" onerror="this.style.opacity='0'">
-
                 <div class="sign-line">KOWE GORILA</div>
             </div>
 
@@ -357,17 +421,17 @@
         });
     </script>
     <script>
-        function preview(event) {
+        function previewPhoto(event) {
             const file = event.target.files[0];
             if (!file) return;
 
             const reader = new FileReader();
-            reader.onload = function () {
-                const photoBox = document.getElementById('p-view');
-                photoBox.innerHTML = `<img src="${reader.result}" alt="Foto Pegawai">`;
+            reader.onload = () => {
+                document.getElementById('photo-view').innerHTML =
+                    `<img src="${reader.result}">`;
             };
             reader.readAsDataURL(file);
         }
-    </script>
 
+    </script>
 </body>
