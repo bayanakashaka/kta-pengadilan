@@ -7,6 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
+
+
     <style>
         :root {
             --emerald: #013c32;
@@ -14,10 +16,11 @@
             --border-gold: #bf953f;
             /* URL Gambar Pola dari Freepik */
         }
-@font-face {
-    font-family: 'Delycost';
-    src: url('Delycost.ttf') format('truetype');
-}
+
+        @font-face {
+            font-family: 'Delycost';
+            src: url('Delycost.ttf') format('truetype');
+        }
 
         body {
             display: flex;
@@ -159,13 +162,11 @@
             z-index: 5;
         }
 
-.photo-ttd-column {
-    width: 110px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
+        .photo-ttd-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+        }
 
         .photo-area {
             width: 110px;
@@ -182,44 +183,40 @@
         }
 
 
-.photo-ttd-column {
-    width: 110px;      /* tetap ukuran foto */
-    position: relative;
-}
+        .ttd-area {
+            width: 190px;
+            height: 46px;
+            /* ⬅️ tambah tinggi dikit */
+            margin-top: 2px;
+            margin-left: -25px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.ttd-wrapper {
-    position: absolute;
-    top: 147px;              /* ⬅️ PRESISI NEMPEL FOTO */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: 46px;
-}
+        .ttd-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-family: 'Delycost', cursive;
+            font-size: 20px;
+            font-weight: 700;
+            color: #000;
+            outline: none;
 
+            line-height: 1.3;
+            /* ⬅️ INI KUNCI: biar huruf atas gak kepotong */
+            padding-top: 6px;
+            /* ⬅️ kasih napas ke atas */
+            padding-bottom: 0;
 
-.ttd-input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: transparent;
-    text-align: center;
-         /* ⬅️ lebih tegas */
-    color: #000;
-
-    line-height: 1.4;
-    padding-top: 6px;
-    resize: none;
-    outline: none;
-    overflow: hidden;
-    white-space: nowrap;     /* ⬅️ KUNCI 1 BARIS */
-    overflow: hidden;
-    text-overflow: clip;
-
-    font-family: 'Delycost', cursive;
-    font-size: 18px;
-    font-weight: 700;        /* lebih bold */
-
-}
+            resize: none;
+            white-space: normal;
+            word-break: break-word;
+            overflow: hidden;
+        }
 
 
         .photo-area img {
@@ -233,6 +230,7 @@
             display: flex;
             flex-direction: column;
         }
+
 
         .hint {
             font-size: 9px;
@@ -382,10 +380,11 @@
                     </label>
                     <input type="file" id="photo-input" hidden accept="image/*" onchange="previewPhoto(event)">
 
-                  <div class="ttd-wrapper">
-        <textarea class="ttd-input" placeholder="Tanda Tangan"></textarea>
-    </div>
-</div>
+                    <!-- TTD -->
+                    <div class="ttd-area">
+                        <textarea class="ttd-input" rows="2" placeholder="Tanda Tangan"></textarea>
+                    </div>
+
 
                 </div>
 
@@ -444,11 +443,7 @@
         }
 
     </script>
+
+
+
 </body>
-
-
-
-
-
-
-
