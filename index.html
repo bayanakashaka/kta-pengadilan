@@ -6,13 +6,15 @@
     <title>KTA Pengadilan Kota Indopride</title>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
 
     <style>
         :root {
             --emerald: #013c32;
             --gold-grad: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --border-gold: #bf953f;
+            /* URL Gambar Pola dari Freepik */
         }
 
         @font-face {
@@ -30,23 +32,23 @@
             font-family: 'Times New Roman', Times, serif;
             background-color: #FF1493;
             background-image: url("tokoh.png");
+            /* ganti sesuai file */
             background-repeat: repeat;
             background-size: 150px 150px;
+            /* ukuran kecil tapi banyak */
         }
 
-        /* Container untuk capture agar tidak terpotong */
-        #capture-area {
-            padding: 10px;
-            background: transparent;
-        }
-
+        /* --- BINGKAI LUAR MENGGUNAKAN BATIK --- */
         .card {
             width: 550px;
             height: 330px;
             background: #fff;
+            border-radius: 0px;
+            /* Sudut membulat elegan */
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(0, 0, 0, 0.1);
+            /* Garis halus pembatas kartu inner */
             z-index: 1;
         }
 
@@ -86,15 +88,18 @@
 
         .side-text {
             transform: rotate(-90deg);
+            color: #fff;
             white-space: nowrap;
             font-size: 12px;
             font-weight: bold;
             letter-spacing: 2px;
-            /* PERBAIKAN: Gunakan warna solid jika gradasi gagal di download */
-            color: #fcf6ba; 
+            background: var(--gold-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-align: center;
             font-style: italic;
         }
+
 
         .header {
             margin-left: 45px;
@@ -109,10 +114,12 @@
             z-index: 5;
         }
 
+        /* GARIS EMAS DI ATAS JUDUL */
         .header::before {
             content: "";
             position: absolute;
             top: 45px;
+            /* posisi tepat di atas tulisan */
             left: 80px;
             right: 80px;
             height: 1px;
@@ -134,8 +141,9 @@
         .header-text h1 {
             margin: 0;
             font-size: 19px;
-            /* PERBAIKAN: Gunakan warna solid emas agar teks tidak putih saat download */
-            color: #fcf6ba;
+            background: var(--gold-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-transform: uppercase;
         }
 
@@ -154,13 +162,18 @@
             z-index: 5;
         }
 
+        .photo-ttd-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+        }
+
         .photo-area {
             width: 110px;
             height: 145px;
             border: 2px solid var(--border-gold);
             background: #eee;
             overflow: hidden;
-            cursor: pointer;
         }
 
         .photo-area img {
@@ -169,9 +182,11 @@
             object-fit: cover;
         }
 
+
         .ttd-area {
             width: 190px;
             height: 46px;
+            /* ⬅️ tambah tinggi dikit */
             margin-top: 2px;
             margin-left: -25px;
             background: transparent;
@@ -190,10 +205,38 @@
             font-weight: 600;
             color: #000;
             outline: none;
+
             line-height: 1.7;
+            /* ⬅️ INI KUNCI: biar huruf atas gak kepotong */
             padding-top: 6px;
+            /* ⬅️ kasih napas ke atas */
+            padding-bottom: 0;
+
             resize: none;
+            white-space: normal;
+            word-break: break-word;
             overflow: hidden;
+        }
+
+
+        .photo-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-ttd-column {
+            width: 110px;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .hint {
+            font-size: 9px;
+            color: #999;
+            text-align: center;
+            line-height: 40px;
         }
 
         .details-grid {
@@ -211,7 +254,7 @@
         }
 
         .value {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'times new roman', Courier, monospace;
             font-weight: bold;
             color: #3b3a3a;
         }
@@ -231,6 +274,12 @@
         .ttd-img {
             height: 50px;
             margin: 4px 0;
+            mix-blend-mode: normal;
+            /* ⬅️ MATIKAN */
+        }
+
+        .bottom-section {
+            position: absolute;
         }
 
         .sign-line {
@@ -262,21 +311,38 @@
             font-size: 13px;
         }
 
-        /* Tombol Download */
-        .btn-download {
-            margin-top: 20px;
-            padding: 10px 25px;
-            background: #013c32;
-            color: #fcf6ba;
-            border: 2px solid #bf953f;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 4px;
+        #barcode {
+            height: 30px;
         }
 
         [contenteditable="true"]:focus {
             outline: none;
             background: #fffde7;
+        }
+
+        @media print {
+            @page {
+                size: 553px 332px;
+                margin: 0;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                background: none !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 20px
+            }
+
+            body>div:first-child {
+                display: none;
+            }
+
+            .card-frame {
+                box-shadow: none !important;
+            }
         }
     </style>
 </head>
@@ -285,11 +351,10 @@
     <div style="color: #f6f0f0; font-size: 15px; margin-bottom: 10px; font-family: Arial;">
         *Klik teks untuk edit | Klik kotak foto untuk ganti foto kamu
     </div>
-
-    <div id="capture-area">
+    <div class="card-frame">
         <div class="card">
             <div class="watermark">
-                <img src="logo.png" crossOrigin="anonymous" onerror="this.style.display='none'">
+                <img src="logo.png" onerror="this.style.display='none'">
             </div>
 
             <div class="side-batik">
@@ -297,39 +362,56 @@
             </div>
 
             <div class="header">
-                <img src="logo2.png" class="logo-img" crossOrigin="anonymous" onerror="this.style.opacity='0'">
+                <img src="logo2.png" class="logo-img" onerror="this.style.opacity='0'">
                 <div class="header-text">
                     <h1>PENGADILAN KOTA INDOPRIDE</h1>
                     <p>Jl. Occupation Avenue Kota Indopride – Kode Pos 7239</p>
                 </div>
-                <img src="logo.png" class="logo-img" crossOrigin="anonymous" onerror="this.style.opacity='0'">
+                <img src="logo.png" class="logo-img" onerror="this.style.opacity='0'">
             </div>
 
             <div class="main-container">
-                <div style="display: flex; flex-direction: column;">
+                <div class="photo-ttd-column">
+
+                    <!-- FOTO -->
                     <label for="photo-input" class="photo-area" id="photo-view">
-                        <div style="text-align:center; padding-top:50px; color:#999; font-size:10px;">Klik Disini <br> Dan Ganti Foto</div>
+                        <div style="text-align:center; padding-top:50px; color:#999; font-size:10px;">Klik Disini <br>
+                            Dan Ganti Foto Kamu</div>
                     </label>
                     <input type="file" id="photo-input" hidden accept="image/*" onchange="previewPhoto(event)">
 
+                    <!-- TTD -->
                     <div class="ttd-area">
                         <textarea class="ttd-input" rows="2" placeholder="Tanda Tangan"></textarea>
                     </div>
+
+
                 </div>
 
+
                 <div class="details-grid">
-                    <div class="label">NAMA</div><div>:</div><div class="value" contenteditable="true">GANTI NAMAMU</div>
-                    <div class="label">NIP</div><div>:</div><div class="value" contenteditable="true">GANTI NO KTA MU</div>
-                    <div class="label">JABATAN</div><div>:</div><div class="value" contenteditable="true">GANTI JABATANMU</div>
-                    <div class="label">BERLAKU</div><div>:</div><div class="value" contenteditable="true">SELAMANYA</div>
+                    <div class="label">NAMA</div>
+                    <div>:</div>
+                    <div class="value" contenteditable="true">GANTI NAMAMU</div>
+                    <div class="label">NIP</div>
+                    <div>:</div>
+                    <div class="value" contenteditable="true">GANTI NO KTA MU</div>
+                    <div class="label">JABATAN</div>
+                    <div>:</div>
+                    <div class="value" contenteditable="true">GANTI JABATANMU</div>
+                    <div class="label">BERLAKU</div>
+                    <div>:</div>
+                    <div class="value" contenteditable="true">GANTI JUGA TGL BERLAKUNYA</div>
                 </div>
             </div>
+
 
             <div class="bottom-section">
                 <div style="font-size:10px;">Ketua Pengadilan,</div>
-                <img src="ttd.png" class="ttd-img" crossOrigin="anonymous" onerror="this.style.opacity='0'">
+                <img src="ttd.png" class="ttd-img" onerror="this.style.opacity='0'">
                 <div class="sign-line">KOWE GORILA</div>
             </div>
+
 
             <div class="footer-bar">
                 <div class="kta-text">KARTU TANDA ANGGOTA</div>
@@ -338,10 +420,7 @@
         </div>
     </div>
 
-    <button class="btn-download" onclick="downloadPNG()">DOWNLOAD KTA (PNG)</button>
-
     <script>
-        // Inisialisasi Barcode
         JsBarcode("#barcode", "INDOPRIDECOURT.XYZ", {
             format: "CODE128",
             width: 1.1,
@@ -349,32 +428,22 @@
             displayValue: false,
             margin: 0
         });
-
-        // Preview Foto
+    </script>
+    <script>
         function previewPhoto(event) {
             const file = event.target.files[0];
             if (!file) return;
+
             const reader = new FileReader();
             reader.onload = () => {
-                document.getElementById('photo-view').innerHTML = `<img src="${reader.result}">`;
+                document.getElementById('photo-view').innerHTML =
+                    `<img src="${reader.result}">`;
             };
             reader.readAsDataURL(file);
         }
 
-        // Fungsi Download
-        function downloadPNG() {
-            const area = document.getElementById("capture-area");
-            html2canvas(area, {
-                scale: 3, // Hasil HD
-                useCORS: true, // Supaya gambar muncul
-                backgroundColor: null
-            }).then(canvas => {
-                const link = document.createElement("a");
-                link.download = "KTA_Indopride.png";
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-            });
-        }
     </script>
+
+
+
 </body>
-</html>
