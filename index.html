@@ -34,8 +34,8 @@
             background-size: 150px 150px;
         }
 
-        /* Container Capture */
-        #kta-capture {
+        /* Container untuk capture agar tidak terpotong */
+        #capture-area {
             padding: 10px;
             background: transparent;
         }
@@ -50,10 +50,9 @@
             z-index: 1;
         }
 
-        /* Memperbaiki posisi Watermark */
         .watermark {
             position: absolute;
-            top: 55%;
+            top: 56%;
             left: 55%;
             transform: translate(-50%, -50%);
             width: 180px;
@@ -63,12 +62,18 @@
             pointer-events: none;
         }
 
-        .watermark img { width: 100%; height: 100%; object-fit: contain; }
+        .watermark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
         .side-batik {
             position: absolute;
-            left: 0; top: 0;
-            width: 45px; height: 100%;
+            left: 0;
+            top: 0;
+            width: 45px;
+            height: 100%;
             background-color: var(--emerald);
             background-image: radial-gradient(var(--border-gold) 0.5px, transparent 0.5px);
             background-size: 8.5px 8.5px;
@@ -79,16 +84,16 @@
             z-index: 10;
         }
 
-        /* Menggunakan teknik penulisan vertikal agar tidak bergeser saat download */
         .side-text {
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
-            color: #fcf6ba;
+            transform: rotate(-90deg);
+            white-space: nowrap;
             font-size: 12px;
             font-weight: bold;
             letter-spacing: 2px;
-            font-style: italic;
+            /* PERBAIKAN: Gunakan warna solid jika gradasi gagal di download */
+            color: #fcf6ba; 
             text-align: center;
+            font-style: italic;
         }
 
         .header {
@@ -104,19 +109,41 @@
             z-index: 5;
         }
 
-        .logo-img { width: 55px; height: 55px; object-fit: contain; }
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 45px;
+            left: 80px;
+            right: 80px;
+            height: 1px;
+            background: var(--gold-grad);
+            border-radius: 2px;
+        }
 
-        .header-text { text-align: center; flex-grow: 1; }
+        .logo-img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+        }
 
-        /* Menggunakan warna solid Emas untuk teks header agar tidak putih saat download */
+        .header-text {
+            text-align: center;
+            flex-grow: 1;
+        }
+
         .header-text h1 {
             margin: 0;
             font-size: 19px;
-            color: #bf953f; 
+            /* PERBAIKAN: Gunakan warna solid emas agar teks tidak putih saat download */
+            color: #fcf6ba;
             text-transform: uppercase;
         }
 
-        .header-text p { margin: 2px 0 0; font-size: 10px; color: white; }
+        .header-text p {
+            margin: 2px 0 0;
+            font-size: 10px;
+            color: white;
+        }
 
         .main-container {
             margin-left: 45px;
@@ -133,19 +160,24 @@
             border: 2px solid var(--border-gold);
             background: #eee;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
         }
 
-        .photo-area img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .ttd-area {
             width: 190px;
             height: 46px;
-            margin-top: 5px;
+            margin-top: 2px;
             margin-left: -25px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .ttd-input {
@@ -154,9 +186,12 @@
             background: transparent;
             text-align: center;
             font-family: 'Delycost', cursive;
-            font-size: 22px;
+            font-size: 20px;
+            font-weight: 600;
             color: #000;
             outline: none;
+            line-height: 1.7;
+            padding-top: 6px;
             resize: none;
             overflow: hidden;
         }
@@ -165,20 +200,37 @@
             flex-grow: 1;
             display: grid;
             grid-template-columns: 80px 10px 1fr;
-            row-gap: 8px;
+            row-gap: 6px;
+            align-content: start;
             font-size: 14px;
         }
 
-        .label { font-weight: bold; color: var(--emerald); }
-        .value { font-weight: bold; color: #3b3a3a; border-bottom: 1px dashed #ccc; }
+        .label {
+            font-weight: bold;
+            color: var(--emerald);
+        }
+
+        .value {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            color: #3b3a3a;
+        }
 
         .bottom-section {
             position: absolute;
             bottom: 35px;
             right: 20px;
             width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
             z-index: 5;
+        }
+
+        .ttd-img {
+            height: 50px;
+            margin: 4px 0;
         }
 
         .sign-line {
@@ -204,28 +256,40 @@
             border-top: 1px solid #ddd;
         }
 
+        .kta-text {
+            color: var(--emerald);
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        /* Tombol Download */
         .btn-download {
             margin-top: 20px;
-            padding: 12px 30px;
+            padding: 10px 25px;
             background: #013c32;
             color: #fcf6ba;
             border: 2px solid #bf953f;
-            font-weight: bold;
             cursor: pointer;
-            border-radius: 5px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        [contenteditable="true"]:focus {
+            outline: none;
+            background: #fffde7;
         }
     </style>
 </head>
 
 <body>
-    <div style="color: #fff; margin-bottom: 10px; font-family: Arial; font-size: 14px;">
-        *Klik teks untuk edit | Klik kotak foto untuk ganti foto
+    <div style="color: #f6f0f0; font-size: 15px; margin-bottom: 10px; font-family: Arial;">
+        *Klik teks untuk edit | Klik kotak foto untuk ganti foto kamu
     </div>
 
-    <div id="kta-capture">
+    <div id="capture-area">
         <div class="card">
             <div class="watermark">
-                <img src="logo.png" crossOrigin="anonymous">
+                <img src="logo.png" crossOrigin="anonymous" onerror="this.style.display='none'">
             </div>
 
             <div class="side-batik">
@@ -233,23 +297,23 @@
             </div>
 
             <div class="header">
-                <img src="logo2.png" class="logo-img" crossOrigin="anonymous">
+                <img src="logo2.png" class="logo-img" crossOrigin="anonymous" onerror="this.style.opacity='0'">
                 <div class="header-text">
                     <h1>PENGADILAN KOTA INDOPRIDE</h1>
                     <p>Jl. Occupation Avenue Kota Indopride – Kode Pos 7239</p>
                 </div>
-                <img src="logo.png" class="logo-img" crossOrigin="anonymous">
+                <img src="logo.png" class="logo-img" crossOrigin="anonymous" onerror="this.style.opacity='0'">
             </div>
 
             <div class="main-container">
-                <div style="width: 110px;">
+                <div style="display: flex; flex-direction: column;">
                     <label for="photo-input" class="photo-area" id="photo-view">
-                        <span style="font-size: 10px; color: #999; text-align: center;">KLIK GANTI FOTO</span>
+                        <div style="text-align:center; padding-top:50px; color:#999; font-size:10px;">Klik Disini <br> Dan Ganti Foto</div>
                     </label>
                     <input type="file" id="photo-input" hidden accept="image/*" onchange="previewPhoto(event)">
-                    
+
                     <div class="ttd-area">
-                        <textarea class="ttd-input" placeholder="Tanda Tangan"></textarea>
+                        <textarea class="ttd-input" rows="2" placeholder="Tanda Tangan"></textarea>
                     </div>
                 </div>
 
@@ -262,39 +326,48 @@
             </div>
 
             <div class="bottom-section">
-                <div style="font-size: 10px;">Ketua Pengadilan,</div>
-                <img src="ttd.png" style="height:45px; margin: 2px 0;" crossOrigin="anonymous">
+                <div style="font-size:10px;">Ketua Pengadilan,</div>
+                <img src="ttd.png" class="ttd-img" crossOrigin="anonymous" onerror="this.style.opacity='0'">
                 <div class="sign-line">KOWE GORILA</div>
             </div>
 
             <div class="footer-bar">
-                <div style="color: #013c32; font-weight: bold; font-size: 13px;">KARTU TANDA ANGGOTA</div>
+                <div class="kta-text">KARTU TANDA ANGGOTA</div>
                 <svg id="barcode"></svg>
             </div>
         </div>
     </div>
 
-    <button class="btn-download" onclick="downloadKTA()">DOWNLOAD PNG</button>
+    <button class="btn-download" onclick="downloadPNG()">DOWNLOAD KTA (PNG)</button>
 
     <script>
-        JsBarcode("#barcode", "INDOPRIDE.COURT", { width: 1.1, height: 26, displayValue: false });
+        // Inisialisasi Barcode
+        JsBarcode("#barcode", "INDOPRIDECOURT.XYZ", {
+            format: "CODE128",
+            width: 1.1,
+            height: 26,
+            displayValue: false,
+            margin: 0
+        });
 
+        // Preview Foto
         function previewPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
             const reader = new FileReader();
             reader.onload = () => {
                 document.getElementById('photo-view').innerHTML = `<img src="${reader.result}">`;
             };
-            reader.readAsDataURL(event.target.files[0]);
+            reader.readAsDataURL(file);
         }
 
-        function downloadKTA() {
-            const target = document.getElementById("kta-capture");
-            html2canvas(target, {
-                scale: 3,
-                useCORS: true,
-                backgroundColor: null,
-                logging: false,
-                removeContainer: true
+        // Fungsi Download
+        function downloadPNG() {
+            const area = document.getElementById("capture-area");
+            html2canvas(area, {
+                scale: 3, // Hasil HD
+                useCORS: true, // Supaya gambar muncul
+                backgroundColor: null
             }).then(canvas => {
                 const link = document.createElement("a");
                 link.download = "KTA_Indopride.png";
